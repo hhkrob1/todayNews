@@ -36,6 +36,9 @@ jobs:
       - name: test push
         run: |
           curl "https://www.zhihu.com/api/v4/columns/c_1327185752502132736/items" | jq ".data[0].content" > 123.txt
+          box=$(curl "https://www.zhihu.com/api/v4/columns/c_1327185752502132736/items" | jq ".data[0].image_url"| sed 's/\"//g')
+          box='<p data-pid="myimg">'$box'</p>'
+          echo $box >> 123.txt
 
           git config --global user.name "123@gmail"
           git config --global user.email "123@gmail.com"
