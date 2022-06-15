@@ -35,8 +35,8 @@ jobs:
         run: sudo apt-get install jq
       - name: test push
         run: |
-          # curl "https://www.zhihu.com/api/v4/columns/c_1327185752502132736/items" | jq ".data[0].content" > 123.txt
-          curl "https://api.vvhan.com/api/moyu?type=json" | jq ".url" >> 123.txt
+          curl "https://www.zhihu.com/api/v4/columns/c_1327185752502132736/items" | jq ".data[0].content" > 123.txt
+          # curl "https://api.vvhan.com/api/moyu?type=json" | jq ".url" >> 123.txt
           git config --global user.name "123@gmail"
           git config --global user.email "123@gmail.com"
           git add -A
