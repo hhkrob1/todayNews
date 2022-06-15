@@ -36,7 +36,7 @@ jobs:
       - name: test push
         run: |
           curl "https://www.zhihu.com/api/v4/columns/c_1327185752502132736/items" | jq ".data[0].content" > 123.txt
-          curl "https://api.vvhan.com/api/moyu?type=json" >> 123.txt
+          echo '<moyu>'$(curl "https://api.j4u.ink/v1/store/other/proxy/remote/moyu.json" | jq ".data.moyu_url")'</moyu>' >> 123.txt
           git config --global user.name "123@gmail"
           git config --global user.email "123@gmail.com"
           git add -A
