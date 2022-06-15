@@ -39,7 +39,7 @@ jobs:
           imageUrl=$(curl "https://api.j4u.ink/v1/store/other/proxy/remote/moyu.json" | jq ".data.moyu_url")
           imageUrl=${imageUrl%\"}
           imageUrl=${imageUrl#\"}
-          curl $imageUrl -O 123.png -L
+          curl ${imageUrl} -o 123.png -L
           git config --global user.name "123@gmail"
           git config --global user.email "123@gmail.com"
           git add -A
