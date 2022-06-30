@@ -37,7 +37,7 @@ jobs:
         run: |
           # curl "https://www.zhihu.com/api/v4/columns/c_1327185752502132736/items" | jq ".data[0].content" > 123.txt
           # curl "https://dict.youdao.com/infoline?mode=publish&apiversion=5.0&date=$(date +%s)" | jq 'first(.[])' | jq ".[0].title, .[0].summary" > 123.txt
-          curl "https://dict.youdao.com/infoline?mode=publish&apiversion=5.0&date=$(date +%s)"
+          curl "https://dict.youdao.com"
           imageUrl=$(curl "https://api.j4u.ink/v1/store/other/proxy/remote/moyu.json" | jq ".data.moyu_url")
           imageUrl=${imageUrl%\"}
           imageUrl=${imageUrl#\"}
