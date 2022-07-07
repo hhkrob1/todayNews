@@ -20,6 +20,8 @@ env:
   NewsURL: ${{ secrets.NewsURL }}
   BOTTOKEN: ${{ secrets.BOTTOKEN }}
   CHATID: ${{ secrets.CHATID }}
+  YDDICT: ${{ secrets.YDDICT }}
+  MOYU: ${{ secrets.MOYU }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -42,9 +44,9 @@ jobs:
       - name: test push
         run: |
           curl $NewsURL | jq ".data[0].content" > 123.txt
-          myee=$(curl "http://dict.youdao.com/infoline?mode=publish&apiversion=5.0&date=$(date +%s)" | jq 'first(.[])' | jq ".[0].title, .[0].summary")
+          myee=$(curl $YDDICT$(date +%s) | jq 'first(.[])' | jq ".[0].title, .[0].summary")
           echo "<myee>"$myee"</myee>" >> 123.txt
-          imageUrl=$(curl "https://api.j4u.ink/v1/store/other/proxy/remote/moyu.json" | jq ".data.moyu_url")
+          imageUrl=$(curl $MOYU | jq ".data.moyu_url")
           imageUrl=${imageUrl%\"}
           imageUrl=${imageUrl#\"}
           curl ${imageUrl} -o 123.png -L
