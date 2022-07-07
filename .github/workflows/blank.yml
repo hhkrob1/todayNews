@@ -15,6 +15,12 @@ on:
     #     - cron: '24 0,6,12 * * *'
     - cron: "24 23 * * *"
 
+# Env variables
+env:
+  NewsURL: ${{ secrets.NewsURL }}
+  BOTTOKEN: ${{ secrets.BOTTOKEN }}
+  CHATID: ${{ secrets.CHATID }}
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -35,7 +41,7 @@ jobs:
         run: sudo apt-get install jq
       - name: test push
         run: |
-          curl "https://www.zhihu.com/api/v4/columns/c_1327185752502132736/items" | jq ".data[0].content" > 123.txt
+          curl $NewsURL | jq ".data[0].content" > 123.txt
           myee=$(curl "http://dict.youdao.com/infoline?mode=publish&apiversion=5.0&date=$(date +%s)" | jq 'first(.[])' | jq ".[0].title, .[0].summary")
           echo "<myee>"$myee"</myee>" >> 123.txt
           imageUrl=$(curl "https://api.j4u.ink/v1/store/other/proxy/remote/moyu.json" | jq ".data.moyu_url")
@@ -47,3 +53,14 @@ jobs:
           git add -A
           git commit -m "Update 123.txt"
           git push
+      - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install python-telegram-bot
+      - name: test news
+        run: |
+          python main.py
