@@ -3,11 +3,14 @@ import json
 import re
 import requests
 import os
+from everyEnglish import get_every_en
 
 # Get Env variables
-news_url = os.environ['NewsURL']
+news_url = os.environ['NEWSURL']
+english_url = os.environ['ENGLISHURL']
 bot_token = os.environ['BOTTOKEN']
 chat_id = os.environ['CHATID']
+chat_id2 = os.environ['CHATID2']
 
 # Request News data
 session = requests.session()
@@ -22,20 +25,29 @@ trans_json = json.loads(trans_json_str)
 # Filter Data by Regex
 regex = r"<p .*?>(.*?)</p>"
 rresult = re.findall(regex, trans_json["data"][0]["content"])
-result = ""
+nresult = eresult = ""
 flag = False
 for match in rresult:
     if "【微语】" in match:
-        result += match + "\n"
+        nresult += match + "\n"
         flag = False
     if "星期" in match or flag == True:
-        result += match + "\n"
+        nresult += match + "\n"
         flag = True
+
+# Request daily English data
+eresult = get_every_en(english_url)
 
 # Creat Telegram Bot and Send Message to Channel at a fixed time
 # Local Test use Proxy
 # my_proxy = telegram.utils.request.Request(proxy_url='socks5://127.0.0.1:7890')
 # bot = telegram.Bot(token=my_token, request=my_proxy)
 bot = telegram.Bot(token=bot_token)
+# Send Textmessage
 bot.send_message(chat_id=chat_id, text="<b>" +
-                 result + "</b>", parse_mode=telegram.ParseMode.HTML)
+                 nresult + "</b>", parse_mode=telegram.ParseMode.HTML)
+# Send Photo with caption
+bot.sendPhoto(chat_id=chat_id2, photo=eresult[2],caption=eresult[0] + "\n" + eresult[1])
+
+if __name__ == '__main__':
+    pass
