@@ -47,7 +47,7 @@ bot = telegram.Bot(token=bot_token)
 bot.send_message(chat_id=chat_id, text="<b>" +
                  nresult + "</b>", parse_mode=telegram.ParseMode.HTML)
 # Send Photo with caption
-bot.sendPhoto(chat_id=chat_id2, photo=eresult[2],caption=eresult[0] + "\n" + eresult[1])
+bot.sendPhoto(chat_id=chat_id2, photo=eresult[2],caption="<b>" + eresult[0] + "\n" + eresult[1] + "</b>", parse_mode=telegram.ParseMode.HTML)
 
 if __name__ == '__main__':
     pass
