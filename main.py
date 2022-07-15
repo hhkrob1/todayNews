@@ -8,6 +8,7 @@ from everyEnglish import get_every_en
 # Get Env variables
 news_url = os.environ['NEWSURL']
 english_url = os.environ['ENGLISHURL']
+iciba_url = os.environ['ICIBAURL']
 bot_token = os.environ['BOTTOKEN']
 chat_id = os.environ['CHATID']
 chat_id2 = os.environ['CHATID2']
@@ -36,7 +37,8 @@ for match in rresult:
         flag = True
 
 # Request daily English data
-eresult = get_every_en(english_url)
+# eresult = get_every_en(english_url)
+eresult = get_every_en(iciba_url)
 
 # Creat Telegram Bot and Send Message to Channel at a fixed time
 # Local Test use Proxy
@@ -45,9 +47,10 @@ eresult = get_every_en(english_url)
 bot = telegram.Bot(token=bot_token)
 # Send Textmessage
 bot.send_message(chat_id=chat_id, text="<b>" +
-                 nresult + "</b>", parse_mode=telegram.ParseMode.HTML)
+                 nresult + "</b>", protect_content=True, parse_mode=telegram.ParseMode.HTML)
 # Send Photo with caption
-bot.sendPhoto(chat_id=chat_id2, photo=eresult[2],caption="<b>" + eresult[0] + "\n" + eresult[1] + "</b>", parse_mode=telegram.ParseMode.HTML)
+bot.sendPhoto(chat_id=chat_id2, protect_content=True, photo=eresult[2],caption="<b>" + eresult[0] + "\n" + eresult[1] + "</b>", parse_mode=telegram.ParseMode.HTML)
+
 
 if __name__ == '__main__':
     pass

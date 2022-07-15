@@ -24,6 +24,7 @@ env:
   YDDICT: ${{ secrets.YDDICT }}
   MOYU: ${{ secrets.MOYU }}
   ENGLISHURL: ${{ secrets.ENGLISHURL }}
+  ICIBAURL: ${{ secrets.ICIBAURL }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:

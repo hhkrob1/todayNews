@@ -1,5 +1,6 @@
 import requests
 import re
+import json
 
 # Get Everyday English Sentence
 def get_every_en(sentence_url):
@@ -9,12 +10,21 @@ def get_every_en(sentence_url):
     }
     session.headers = headers
     sentence_resp = session.get(sentence_url).content.decode()
+    sentence_json = json.loads(sentence_resp)
+    result_sentence = result_media = []
 
-    regex1 = r"<div class='status__content emojify'><div class='e-content' lang='en'>.*?<p>(.*?)<br />(.*?)<br /><a"
-    regex2 = r"<div data-component=\"MediaGallery\".*?(https.*?\.jpg)"
-    sresult1 = re.findall(regex1, sentence_resp, re.MULTILINE | re.DOTALL)
-    sresult2 = re.findall(regex2, sentence_resp, re.MULTILINE | re.DOTALL)
-    return sresult1[0][0], sresult1[0][1], sresult2[0]
+    # First interface API
+    # regex1 = r"<div class='status__content emojify'><div class='e-content' lang='en'>.*?<p>(.*?)<br />(.*?)<br /><a"
+    # regex2 = r"<div data-component=\"MediaGallery\".*?(https.*?\.jpg)"
+    # result_sentence = re.findall(regex1, sentence_resp, re.MULTILINE | re.DOTALL)
+    # result_media = re.findall(regex2, sentence_resp, re.MULTILINE | re.DOTALL)
+
+    # Second interface API
+    result_sentence = [[sentence_json["content"], sentence_json["note"]]]
+    result_media = [sentence_json["picture2"],sentence_json["tts"]]
+
+    # Return data
+    return result_sentence[0][0], result_sentence[0][1], result_media[0], result_media[1]
 
 if __name__ == '__main__':
     pass
