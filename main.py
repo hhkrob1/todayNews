@@ -10,11 +10,15 @@ from everyEnglish import get_every_en
 news_url = os.environ['NEWSURL']
 english_url = os.environ['ENGLISHURL']
 iciba_url = os.environ['ICIBAURL']
+moyu_url = os.environ['MOYU']
 develop_url = os.environ['DEVELOPURL']
 bot_token = os.environ['BOTTOKEN']
 chat_id = os.environ['CHATID']
 chat_id2 = os.environ['CHATID2']
 chat_id3 = os.environ['CHATID3']
+
+#
+calendarData = ""
 
 # Request News data
 session = requests.session()
@@ -36,6 +40,8 @@ for match in rresult:
         nresult += match + "\n"
         flag = False
     if "星期" in match or flag == True:
+        if "星期" in match:
+            calendarData = match
         nresult += match + "\n"
         flag = True
 
@@ -44,7 +50,7 @@ for match in rresult:
 eresult = get_every_en(iciba_url)
 
 # Request Daily Develop News data
-dresult = get_every_dev(develop_url)
+dresult = get_every_dev(develop_url, moyu_url, calendarData)
 
 # Creat Telegram Bot and Send Message to Channel at a fixed time
 # Local Test use Proxy
