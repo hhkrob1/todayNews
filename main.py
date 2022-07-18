@@ -35,14 +35,16 @@ regex = r"<p .*?>(.*?)</p>"
 rresult = re.findall(regex, trans_json["data"][0]["content"])
 nresult = eresult = ""
 flag = False
-for match in rresult:
-    if "【微语】" in match:
-        nresult += match + "\n"
+for matchr in rresult:
+    if "【微语】" in matchr:
+        nresult += matchr + "\n"
         flag = False
-    if "星期" in match or flag == True:
-        if "星期" in match:
-            calendarData = match
-        nresult += match + "\n"
+    if "星期" in matchr or flag == True:
+        if "星期" in matchr:
+            calendarData = matchr
+        matchr = re.match('^(\d*?)、(.*)', matchr).groups()
+        matchr = "{: <4s}".format(matchr[0] + ".") + matchr[1]
+        nresult += matchr + "\n"
         flag = True
 
 # Request Daily English data
@@ -66,7 +68,7 @@ bot.send_message(chat_id=chat_id, text="<b>" +
 bot.send_photo(chat_id=chat_id2, protect_content=True, photo=eresult[2],caption="<b>" + eresult[0] + "\n" + eresult[1] + "</b>", parse_mode=telegram.ParseMode.HTML)
 
 # Send Textmessage to chat_id3
-bot.send_message(chat_id=chat_id3, text=dresult, protect_content=True, disable_web_page_preview=True, parse_mode=telegram.ParseMode.HTML)
+bot.send_message(chat_id=chat_id3, text=dresult, protect_content=True, disable_web_page_preview=False, parse_mode=telegram.ParseMode.HTML)
 
 
 if __name__ == '__main__':
