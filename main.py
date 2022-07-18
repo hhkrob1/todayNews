@@ -60,7 +60,7 @@ bot.send_message(chat_id=chat_id, text="<b>" +
 bot.send_photo(chat_id=chat_id2, protect_content=True, photo=eresult[2],caption="<b>" + eresult[0] + "\n" + eresult[1] + "</b>", parse_mode=telegram.ParseMode.HTML)
 
 # Send Textmessage to chat_id3
-bot.send_message(chat_id=chat_id3, text=dresult, protect_content=True, parse_mode=telegram.ParseMode.HTML)
+bot.send_message(chat_id=chat_id3, text=dresult, protect_content=True, disable_web_page_preview=True, parse_mode=telegram.ParseMode.HTML)
 
 
 if __name__ == '__main__':

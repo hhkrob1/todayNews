@@ -13,11 +13,14 @@ def get_every_dev(news_url):
 
     # Parse
     soup = BeautifulSoup(sentence_resp, "html.parser")
-    res = ['<a href="{}">{}</a>'.format(news_url + "/" + i.attrs.get(
+    resl = ['、<a href="{}">{}</a>'.format(news_url + "/" + i.attrs.get(
     "href"), i.text) for i in soup.select('.daily>.posts .post .title a')]
+    res = ""
+    for i in range(len(resl)):
+        res += str(i + 1) + resl[i] + "\n"
 
     # Return data
-    return ''.join(res)
+    return res
 
 
 if __name__ == '__main__':
