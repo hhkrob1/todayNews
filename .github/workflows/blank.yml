@@ -21,10 +21,12 @@ env:
   BOTTOKEN: ${{ secrets.BOTTOKEN }}
   CHATID: ${{ secrets.CHATID }}
   CHATID2: ${{ secrets.CHATID2 }}
+  CHATID3: ${{ secrets.CHATID3 }}
   YDDICT: ${{ secrets.YDDICT }}
   MOYU: ${{ secrets.MOYU }}
   ENGLISHURL: ${{ secrets.ENGLISHURL }}
   ICIBAURL: ${{ secrets.ICIBAURL }}
+  DEVELOPURL: ${{ secrets.DEVELOPURL }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -68,6 +70,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install python-telegram-bot
           pip install requests
+          pip install beautifulsoup4
       - name: Get news and Send
         run: |
           python main.py

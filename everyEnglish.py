@@ -2,7 +2,7 @@ import requests
 import re
 import json
 
-# Get Everyday English Sentence
+# Get Everyday English Sentence data
 def get_every_en(sentence_url):
     session = requests.session()
     headers = {
@@ -25,6 +25,7 @@ def get_every_en(sentence_url):
 
     # Return data
     return result_sentence[0][0], result_sentence[0][1], result_media[0], result_media[1]
+
 
 if __name__ == '__main__':
     pass
