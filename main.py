@@ -42,8 +42,9 @@ for matchr in rresult:
     if "星期" in matchr or flag == True:
         if "星期" in matchr:
             calendarData = matchr
-        matchr = re.match('^(\d*?)、(.*)', matchr).groups()
-        matchr = "{: <4s}".format(matchr[0] + ".") + matchr[1]
+        if re.match('^(\d*?)、(.*)', matchr) != None:
+            matchr = re.match('^(\d*?)、(.*)', matchr).groups()
+            matchr = "{: <4s}".format(matchr[0] + ".") + matchr[1]
         nresult += matchr + "\n"
         flag = True
 
