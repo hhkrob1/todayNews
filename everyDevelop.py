@@ -17,7 +17,7 @@ def get_every_dev(news_url):
     "href"), i.text) for i in soup.select('.daily>.posts .post .title a')]
     res = ""
     for i in range(len(resl)):
-        res += str(i + 1) + resl[i] + "\n"
+        res += "<b>" + str(i + 1) + resl[i] + "\n" + "</b>"
 
     # Return data
     return res
