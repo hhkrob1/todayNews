@@ -17,6 +17,7 @@ on:
 
 # Env variables
 env:
+  MHK: ${{ secrets.MHK }}
   NEWSURL: ${{ secrets.NEWSURL }}
   BOTTOKEN: ${{ secrets.BOTTOKEN }}
   CHATID: ${{ secrets.CHATID }}
@@ -49,6 +50,7 @@ jobs:
         run: sudo apt-get install jq
       - name: Get news and Commit
         run: |
+          curl -I -s $MHK | grep "HTTP" | awk '{print $2" "$3}'
           curl $NEWSURL | jq ".data[0].content" > 123.txt
           myee=$(curl $YDDICT$(date +%s) | jq 'first(.[])' | jq ".[0].title, .[0].summary")
           echo "<myee>"$myee"</myee>" >> 123.txt

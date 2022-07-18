@@ -16,7 +16,7 @@ def get_every_dev(news_url, moyu_url, calendarData):
     moyu_res = '<b><a href="' + moyu_json.get("data").get("moyu_url") + '">' + calendarData + "</a>\n</b>"
     # Parse
     soup = BeautifulSoup(news_resp, "html.parser")
-    resl = ['<a href="{}">{}</a>'.format(news_url + "/" + i.attrs.get(
+    resl = ['<a href="{}">{}</a>'.format(news_url + i.attrs.get(
     "href"), i.text) for i in soup.select('.daily>.posts .post .title a')]
     res = ""
     for i in range(len(resl)):
