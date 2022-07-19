@@ -44,7 +44,8 @@ for matchr in rresult:
             calendarData = matchr
         if re.match('^(\d*?)、(.*)', matchr) != None:
             matchr = re.match('^(\d*?)、(.*)', matchr).groups()
-            matchr = "{: <4s}".format(matchr[0] + ".") + matchr[1]
+            dot_str = "." if matchr[0] >=10 else ". "
+            matchr = "{: <4s}".format(matchr[0] + dot_str) + matchr[1]
         nresult += matchr + "\n"
         flag = True
 

@@ -29,7 +29,8 @@ def get_every_dev(news_url, moyu_url, calendarData):
     "href"), i.text) for i in soup.select('.daily>.posts .post .title a')]
     res = ""
     for i in range(len(resl)):
-        res += "<b>" + "{: <4s}".format(str(i + 1)+". ") + resl[i] + "\n" + "</b>"
+        dot_str = "." if (i + 1) >=10 else ". "
+        res += "<b>" + "{: <4s}".format(str(i + 1)+dot_str) + resl[i] + "\n" + "</b>"
 
     # Return data
     return moyu_res + res
