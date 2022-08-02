@@ -28,6 +28,8 @@ env:
   ENGLISHURL: ${{ secrets.ENGLISHURL }}
   ICIBAURL: ${{ secrets.ICIBAURL }}
   DEVELOPURL: ${{ secrets.DEVELOPURL }}
+  XIAOAIURL1: ${{ secrets.XIAOAIURL1 }}
+  XIAOAIURL2: ${{ secrets.XIAOAIURL2 }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -52,8 +54,12 @@ jobs:
         run: |
           curl -I -s $MHK | grep "HTTP" | awk '{print $2" "$3}'
           curl $NEWSURL | jq ".data[0].content" > 123.txt
+          xiaoai_url=$XIAOAIURL2$(curl $XIAOAIURL1 | jq -r '.data.list[0].id')
+          xiaoai_title=$(curl $XIAOAIURL1 | jq -r '.data.list[0].title')
           myee=$(curl $YDDICT$(date +%s) | jq 'first(.[])' | jq ".[0].title, .[0].summary")
           echo "<myee>"$myee"</myee>" >> 123.txt
+          echo "<myxat>"$xiaoai_title"</myxat" >> 123.txt
+          echo "<myxal>"$xiaoai_url"</myxal>" >> 123.txt
           imageUrl=$(curl $MOYU | jq ".data.moyu_url")
           imageUrl=${imageUrl%\"}
           imageUrl=${imageUrl#\"}
