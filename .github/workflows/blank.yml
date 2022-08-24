@@ -67,8 +67,8 @@ jobs:
           git config --global user.name "123@gmail"
           git config --global user.email "123@gmail.com"
           git add -A
-          git commit -m "Update"
-          git push
+          gif diff --exit-code || git commit -am "Update"
+          git push -f
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
