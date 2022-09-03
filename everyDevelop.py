@@ -25,12 +25,15 @@ def get_every_dev(news_url, moyu_url, calendarData):
     moyu_res = '<b><a href="' + moyu_res + '">' + calendarData + "</a>\n</b>"
     # Parse
     soup = BeautifulSoup(news_resp, "html.parser")
-    resl = ['<a href="{}">{}</a>'.format(news_url + i.attrs.get(
+    # resl = ['<a href="{}">{}</a>'.format(news_url + i.attrs.get(
+    # "href"), i.text) for i in soup.select('.daily>.posts .post .title a')]
+    resl = ['{}</a>'.format(news_url + i.attrs.get(
     "href"), i.text) for i in soup.select('.daily>.posts .post .title a')]
     res = ""
     for i in range(len(resl)):
         dot_str = "." if (i + 1) >=10 else ".   "
-        res += "<b>" + "{: <4s}".format(str(i + 1)+dot_str) + resl[i] + "\n" + "</b>"
+        # res += "<b>" + "{: <4s}".format(str(i + 1)+dot_str) + resl[i] + "\n" + "</b>"
+        res += "<b>" + '<a href="{}">' + "{: <4s}".format(str(i + 1)+dot_str) + resl[i] + "\n" + "</b>"
 
     # Return data
     return moyu_res + res
