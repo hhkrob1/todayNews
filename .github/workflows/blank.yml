@@ -52,7 +52,6 @@ jobs:
         run: sudo apt-get install jq
       - name: Get news and Commit
         run: |
-          curl -I -s $MHK | grep "HTTP" | awk '{print $2" "$3}'
           curl $NEWSURL | jq ".data[0].content" > 123.txt
           xiaoai_url=$XIAOAIURL2$(curl $XIAOAIURL1 | jq -r '.data.list[0].id')
           xiaoai_title=$(curl $XIAOAIURL1 | jq -r '.data.list[0].title')
