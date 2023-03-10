@@ -20,7 +20,7 @@ def get_every_dev(news_url, moyu_url, calendarData):
             break
         moyu_res = moyu_pic_url
         moyu_pic_url = session.get(
-            moyu_pic_url, allow_redirects=False).headers.get("location")
+            moyu_pic_url, allow_redirects=True).headers.get("location")
 
     moyu_res = '<b><a href="' + moyu_res + '">' + calendarData + "</a>\n</b>"
     # Parse
