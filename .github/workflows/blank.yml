@@ -53,4 +53,6 @@ jobs:
       - name: Get news and Commit
         run: |
           imageUrl=$(curl $MOYU | jq ".data.moyu_url")
+          imageUrl=${imageUrl%\"}
+          imageUrl=${imageUrl#\"}
           echo $imageUrl
