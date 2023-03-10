@@ -14,13 +14,7 @@ def get_every_dev(news_url, moyu_url, calendarData):
     moyu_resp2 = session.get(moyu_url).content.decode()
     moyu_json = json.loads(moyu_resp2)
     moyu_pic_url = moyu_json.get("data").get("moyu_url")
-    moyu_res = ""
-    while True:
-        if moyu_pic_url == None:
-            break
-        moyu_res = moyu_pic_url
-        moyu_pic_url = session.get(
-            moyu_pic_url, allow_redirects=True).headers.get("location")
+    moyu_res = moyu_pic_url
 
     moyu_res = '<b><a href="' + moyu_res + '">' + calendarData + "</a>\n</b>"
     # Parse
