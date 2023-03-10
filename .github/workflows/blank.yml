@@ -52,32 +52,7 @@ jobs:
         run: sudo apt-get install jq
       - name: Get news and Commit
         run: |
-          curl $NEWSURL | jq ".data[0].content" > 123.txt
-          xiaoai_url=$XIAOAIURL2$(curl $XIAOAIURL1 | jq -r '.data.list[0].id')
-          xiaoai_title=$(curl $XIAOAIURL1 | jq -r '.data.list[0].title')
-          myee=$(curl $YDDICT$(date +%s) | jq 'first(.[])' | jq ".[0].title, .[0].summary")
-          echo "<myee>"$myee"</myee>" >> 123.txt
-          echo "<myxat>"$xiaoai_title"</myxat" >> 123.txt
-          echo "<myxal>"$xiaoai_url"</myxal>" >> 123.txt
           imageUrl=$(curl $MOYU | jq ".data.moyu_url")
           imageUrl=${imageUrl%\"}
           imageUrl=${imageUrl#\"}
           curl ${imageUrl} -o 123.png -L
-          git config --global user.name "123@gmail"
-          git config --global user.email "123@gmail.com"
-          git add -A
-          gif diff --exit-code || git commit -am "Update"
-          git push -f
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - name: Install dependent
-        run: |
-          python -m pip install --upgrade pip
-          pip install python-telegram-bot==13.13
-          pip install requests==2.28.0
-          pip install beautifulsoup4==4.11.1
-      - name: Get news and Send
-        run: |
-          python main.py
