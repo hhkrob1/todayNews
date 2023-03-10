@@ -52,4 +52,4 @@ jobs:
         run: sudo apt-get install jq
       - name: Get news and Commit
         run: |
-          curl https://pic.imgdb.cn/item/640a0613f144a010075cd13f.webp -o 123.png -L
+          echo curl https://pic.imgdb.cn/item/640a0613f144a010075cd13f.webp -o 123.png -L
