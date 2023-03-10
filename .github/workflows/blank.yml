@@ -52,7 +52,4 @@ jobs:
         run: sudo apt-get install jq
       - name: Get news and Commit
         run: |
-          imageUrl=$(curl $MOYU | jq ".data.moyu_url")
-          imageUrl=${imageUrl%\"}
-          imageUrl=${imageUrl#\"}
-          echo $imageUrl
+          curl https://api.j4u.ink/proxy/redirect/moyu/calendar/20230310.png
