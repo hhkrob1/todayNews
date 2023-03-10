@@ -52,4 +52,4 @@ jobs:
         run: sudo apt-get install jq
       - name: Get news and Commit
         run: |
-          curl https://pic.imgdb.cn/item/640a0613f144a010075cd13f.webp -o 123.png
+          curl https://api.j4u.ink/proxy/redirect/moyu/calendar/20230310.png -o 123.png -L --max-redirs 2
