@@ -48,6 +48,6 @@ def run():
 
 result = run()
 if result == 200:
-	print(f"[:)] 已经成功增加流量到你的warp+账号中.")
+	print(f"[:)] 成功：增加1G流量到你的warp+账号中.")
 else:
-	print(f"[:)] 未能成功增加流量到你的warp+账号中.")
+	print(f"[:(] 失败：增加1G流量到你的warp+账号中.")
